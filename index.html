@@ -1,14 +1,287 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Hello World</title>
-  <link href='/style.css' rel='stylesheet'>
+<meta charset="UTF-8">
+<title>Circular Pomodoro Timer</title>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<style>
+  :root {
+    --bg-color: #0f172a;
+    --card-bg: #1e293b;
+    --work-color: #22c55e;
+    --break-color: #38bdf8;
+    --text-main: #ffffff;
+    --text-dim: #94a3b8;
+  }
+
+  * {
+    box-sizing: border-box;
+    -webkit-tap-highlight-color: transparent;
+    margin: 0;
+    padding: 0;
+  }
+
+  body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background: var(--bg-color);
+    color: var(--text-main);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+  }
+
+  .container {
+    width: 100%;
+    max-width: 360px; /* Constrained for mobile symmetry */
+    text-align: center;
+  }
+
+  header h1 { font-size: 1.8rem; margin-bottom: 0.5rem; }
+  header p { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 1.5rem; }
+
+  /* ===== Responsive Circle ===== */
+  .circle-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: 280px;
+    aspect-ratio: 1 / 1;
+    margin: 0 auto 1.5rem;
+  }
+
+  svg { 
+    transform: rotate(-90deg); 
+    width: 100%; 
+    height: 100%; 
+  }
+
+  circle {
+    fill: none;
+    stroke-width: 12;
+  }
+
+  .bg { stroke: #334155; }
+
+  .progress {
+    stroke: var(--work-color);
+    stroke-linecap: round;
+    transition: stroke-dashoffset 1s linear, stroke 0.3s ease;
+  }
+
+  .time-text {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .time {
+    font-size: clamp(3rem, 15vw, 4rem); /* Dynamic font size */
+    font-weight: 800;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .mode {
+    font-size: 1rem;
+    color: var(--text-dim);
+    font-weight: 500;
+    letter-spacing: 1px;
+  }
+
+  /* ===== Controls ===== */
+  .controls {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    margin-bottom: 1.5rem;
+  }
+
+  button {
+    font-size: 0.9rem;
+    padding: 12px 0;
+    border-radius: 12px;
+    border: none;
+    cursor: pointer;
+    font-weight: bold;
+    color: white;
+  }
+
+  .start { background: var(--work-color); }
+  .pause { background: #facc15; color: #000; }
+  .reset { background: #ef4444; }
+
+  /* ===== Settings ===== */
+  .settings {
+    background: var(--card-bg);
+    padding: 1.2rem;
+    border-radius: 16px;
+  }
+
+  .inputs {
+    display: flex;
+    justify-content: space-around;
+    margin-bottom: 1rem;
+  }
+
+  .input-box {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    font-size: 0.85rem;
+  }
+
+  input[type="number"] {
+    width: 60px;
+    background: #0f172a;
+    border: 1px solid #334155;
+    color: white;
+    padding: 6px;
+    border-radius: 8px;
+    text-align: center;
+  }
+
+  .sound-toggle {
+    font-size: 0.85rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    color: var(--text-dim);
+  }
+</style>
 </head>
 <body>
-  <h1>Hello, world!</h1>
-  <button onclick="console.log('hello');">Press me</button>
-  <script defer type="text/javascript" src="/main.js"></script>
+
+<div class="container">
+  <header>
+    <h1>🍅 Pomodoro</h1>
+    <p>Focus & Rest Balance</p>
+  </header>
+
+  <div class="circle-wrapper">
+    <svg viewBox="0 0 250 250">
+      <circle class="bg" cx="125" cy="125" r="115"></circle>
+      <circle id="progress" class="progress" cx="125" cy="125" r="115"></circle>
+    </svg>
+    <div class="time-text">
+      <div class="time" id="time">25:00</div>
+      <div class="mode" id="mode">FOCUS</div>
+    </div>
+  </div>
+
+  <div class="controls">
+    <button class="start" id="startBtn">START</button>
+    <button class="pause" id="pauseBtn">PAUSE</button>
+    <button class="reset" id="resetBtn">RESET</button>
+  </div>
+
+  <div class="settings">
+    <div class="inputs">
+      <div class="input-box">
+        <label>Work (min)</label>
+        <input type="number" id="workMin" value="25" min="1">
+      </div>
+      <div class="input-box">
+        <label>Break (min)</label>
+        <input type="number" id="breakMin" value="5" min="1">
+      </div>
+    </div>
+
+    <label class="sound-toggle">
+      <input type="checkbox" id="soundOn" checked>
+      Enable Alarm Sound
+    </label>
+  </div>
+</div>
+
+<audio id="alarm">
+  <source src="https://actions.google.com/sounds/v1/alarms/beep_short.ogg" type="audio/ogg">
+</audio>
+
+<script>
+  const timeEl = document.getElementById("time");
+  const modeEl = document.getElementById("mode");
+  const progressCircle = document.getElementById("progress");
+  const alarm = document.getElementById("alarm");
+  const soundOn = document.getElementById("soundOn");
+  const workInput = document.getElementById("workMin");
+  const breakInput = document.getElementById("breakMin");
+
+  const RADIUS = 115;
+  const CIRC = 2 * Math.PI * RADIUS;
+  progressCircle.style.strokeDasharray = CIRC;
+
+  let isRunning = false;
+  let isWork = true;
+  let timer = null;
+  let totalSec = 25 * 60;
+  let currentSec = totalSec;
+
+  function formatTime(sec) {
+    const m = Math.floor(sec / 60).toString().padStart(2, "0");
+    const s = (sec % 60).toString().padStart(2, "0");
+    return `${m}:${s}`;
+  }
+
+  function updateDisplay() {
+    timeEl.textContent = formatTime(currentSec);
+    const offset = CIRC * (1 - currentSec / totalSec);
+    progressCircle.style.strokeDashoffset = offset;
+  }
+
+  function switchMode() {
+    if (soundOn.checked) alarm.play().catch(() => {});
+    isWork = !isWork;
+    
+    if (isWork) {
+      totalSec = workInput.value * 60;
+      modeEl.textContent = "FOCUS";
+      progressCircle.style.stroke = "var(--work-color)";
+    } else {
+      totalSec = breakInput.value * 60;
+      modeEl.textContent = "BREAK";
+      progressCircle.style.stroke = "var(--break-color)";
+    }
+    currentSec = totalSec;
+    updateDisplay();
+    start();
+  }
+
+  function start() {
+    if (isRunning) return;
+    isRunning = true;
+    timer = setInterval(() => {
+      currentSec--;
+      if (currentSec < 0) {
+        clearInterval(timer);
+        isRunning = false;
+        switchMode();
+      } else {
+        updateDisplay();
+      }
+    }, 1000);
+  }
+
+  document.getElementById("startBtn").onclick = start;
+  document.getElementById("pauseBtn").onclick = () => {
+    clearInterval(timer);
+    isRunning = false;
+  };
+  document.getElementById("resetBtn").onclick = () => {
+    clearInterval(timer);
+    isRunning = false;
+    isWork = true;
+    totalSec = workInput.value * 60;
+    currentSec = totalSec;
+    modeEl.textContent = "FOCUS";
+    progressCircle.style.stroke = "var(--work-color)";
+    updateDisplay();
+  };
+
+  updateDisplay();
+</script>
 </body>
 </html>
