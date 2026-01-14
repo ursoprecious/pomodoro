@@ -1,12 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
 <meta charset="UTF-8">
-<title>Circular Pomodoro Timer</title>
+<title>뽀모도로 타이머 - 집중력 향상을 위한 무료 온라인 타이머 | Pomodoro Timer</title>
+<meta name="description" content="무료 온라인 뽀모도로 타이머로 집중력과 생산성을 높이세요. 25분 집중, 5분 휴식의 과학적인 시간 관리 기법을 지금 바로 시작하세요.">
+<meta name="keywords" content="뽀모도로, 타이머, 집중력, 생산성, 시간관리, pomodoro, timer, 공부타이머, 집중타이머">
+<meta name="author" content="Pomodoro Timer">
 <meta name="google-adsense-account" content="ca-pub-8685691842167676">
 <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8685691842167676"
      crossorigin="anonymous"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<link rel="canonical" href="https://ursoprecious.github.io/pomodoro/">
+<meta property="og:title" content="뽀모도로 타이머 - 무료 온라인 집중 타이머">
+<meta property="og:description" content="25분 집중, 5분 휴식! 과학적인 뽀모도로 기법으로 생산성을 높이세요.">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://ursoprecious.github.io/pomodoro/">
 <style>
   :root {
     --bg-color: #0f172a;
@@ -15,6 +23,7 @@
     --break-color: #38bdf8;
     --text-main: #ffffff;
     --text-dim: #94a3b8;
+    --accent: #f97316;
   }
 
   * {
@@ -24,27 +33,75 @@
     padding: 0;
   }
 
+  html {
+    scroll-behavior: smooth;
+  }
+
   body {
-    font-family: system-ui, -apple-system, sans-serif;
+    font-family: 'Pretendard', system-ui, -apple-system, sans-serif;
     background: var(--bg-color);
     color: var(--text-main);
+    line-height: 1.7;
+  }
+
+  /* Navigation */
+  nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    background: rgba(15, 23, 42, 0.95);
+    backdrop-filter: blur(10px);
+    padding: 1rem 2rem;
+    z-index: 1000;
+    border-bottom: 1px solid #334155;
+  }
+
+  nav ul {
+    list-style: none;
     display: flex;
     justify-content: center;
-    align-items: center;
-    min-height: 100vh;
+    gap: 2rem;
+    flex-wrap: wrap;
+  }
+
+  nav a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.9rem;
+    transition: color 0.3s;
+  }
+
+  nav a:hover {
+    color: var(--work-color);
+  }
+
+  /* Main Container */
+  .page-container {
+    max-width: 800px;
+    margin: 0 auto;
     padding: 20px;
   }
 
-  .container {
-    width: 100%;
-    max-width: 360px; /* Constrained for mobile symmetry */
+  /* Hero Section - Timer */
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     text-align: center;
+    padding-top: 60px;
   }
 
-  header h1 { font-size: 1.8rem; margin-bottom: 0.5rem; }
-  header p { color: var(--text-dim); font-size: 0.9rem; margin-bottom: 1.5rem; }
+  .timer-container {
+    width: 100%;
+    max-width: 360px;
+  }
 
-  /* ===== Responsive Circle ===== */
+  header h1 { font-size: 2rem; margin-bottom: 0.5rem; }
+  header p { color: var(--text-dim); font-size: 1rem; margin-bottom: 1.5rem; }
+
   .circle-wrapper {
     position: relative;
     width: 100%;
@@ -53,10 +110,10 @@
     margin: 0 auto 1.5rem;
   }
 
-  svg { 
-    transform: rotate(-90deg); 
-    width: 100%; 
-    height: 100%; 
+  svg {
+    transform: rotate(-90deg);
+    width: 100%;
+    height: 100%;
   }
 
   circle {
@@ -82,7 +139,7 @@
   }
 
   .time {
-    font-size: clamp(3rem, 15vw, 4rem); /* Dynamic font size */
+    font-size: clamp(3rem, 15vw, 4rem);
     font-weight: 800;
     font-variant-numeric: tabular-nums;
   }
@@ -94,7 +151,6 @@
     letter-spacing: 1px;
   }
 
-  /* ===== Controls ===== */
   .controls {
     display: grid;
     grid-template-columns: repeat(3, 1fr);
@@ -110,13 +166,18 @@
     cursor: pointer;
     font-weight: bold;
     color: white;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+
+  button:hover {
+    transform: scale(1.02);
+    opacity: 0.9;
   }
 
   .start { background: var(--work-color); }
   .pause { background: #facc15; color: #000; }
   .reset { background: #ef4444; }
 
-  /* ===== Settings ===== */
   .settings {
     background: var(--card-bg);
     padding: 1.2rem;
@@ -154,61 +215,351 @@
     gap: 8px;
     color: var(--text-dim);
   }
+
+  /* Content Sections */
+  section {
+    padding: 4rem 0;
+    border-top: 1px solid #334155;
+  }
+
+  section h2 {
+    font-size: 1.8rem;
+    margin-bottom: 1.5rem;
+    color: var(--work-color);
+  }
+
+  section h3 {
+    font-size: 1.3rem;
+    margin: 1.5rem 0 1rem;
+    color: var(--accent);
+  }
+
+  section p {
+    margin-bottom: 1rem;
+    color: var(--text-dim);
+  }
+
+  section ul, section ol {
+    margin: 1rem 0 1.5rem 1.5rem;
+    color: var(--text-dim);
+  }
+
+  section li {
+    margin-bottom: 0.5rem;
+  }
+
+  .highlight-box {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 12px;
+    margin: 1.5rem 0;
+    border-left: 4px solid var(--work-color);
+  }
+
+  .highlight-box p {
+    margin: 0;
+    color: var(--text-main);
+  }
+
+  .benefits-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 1rem;
+    margin: 1.5rem 0;
+  }
+
+  .benefit-card {
+    background: var(--card-bg);
+    padding: 1.5rem;
+    border-radius: 12px;
+    text-align: center;
+  }
+
+  .benefit-card .icon {
+    font-size: 2rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .benefit-card h4 {
+    margin-bottom: 0.5rem;
+    color: var(--text-main);
+  }
+
+  .benefit-card p {
+    font-size: 0.9rem;
+    margin: 0;
+  }
+
+  /* Ad Container */
+  .ad-container {
+    margin: 2rem 0;
+    min-height: 100px;
+  }
+
+  /* Footer */
+  footer {
+    text-align: center;
+    padding: 2rem;
+    border-top: 1px solid #334155;
+    color: var(--text-dim);
+    font-size: 0.85rem;
+  }
+
+  footer a {
+    color: var(--text-dim);
+    text-decoration: underline;
+  }
+
+  footer a:hover {
+    color: var(--work-color);
+  }
+
+  .footer-links {
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    margin-bottom: 1rem;
+    flex-wrap: wrap;
+  }
+
+  /* Responsive */
+  @media (max-width: 600px) {
+    nav ul {
+      gap: 1rem;
+    }
+
+    section {
+      padding: 3rem 0;
+    }
+
+    section h2 {
+      font-size: 1.5rem;
+    }
+  }
 </style>
 </head>
 <body>
 
-<div class="container">
-  <header>
-    <h1>🍅 Pomodoro Timer</h1>
-    <p>Focus & Rest Balance</p>
-  </header>
+<nav>
+  <ul>
+    <li><a href="#timer">타이머</a></li>
+    <li><a href="#about">뽀모도로란?</a></li>
+    <li><a href="#how-to-use">사용법</a></li>
+    <li><a href="#benefits">효과</a></li>
+    <li><a href="#tips">팁</a></li>
+  </ul>
+</nav>
 
-  <!-- Google AdSense Display Ad Unit -->
-  <ins class="adsbygoogle"
-       style="display:block"
-       data-ad-client="ca-pub-8685691842167676"
-       data-ad-slot="auto"
-       data-ad-format="auto"
-       data-full-width-responsive="true"></ins>
-  <script>
-       (adsbygoogle = window.adsbygoogle || []).push({});
-  </script>
+<!-- Hero: Timer Section -->
+<div class="page-container">
+  <section class="hero" id="timer">
+    <div class="timer-container">
+      <header>
+        <h1>뽀모도로 타이머</h1>
+        <p>집중과 휴식의 완벽한 균형</p>
+      </header>
 
-  <div class="circle-wrapper">
-    <svg viewBox="0 0 250 250">
-      <circle class="bg" cx="125" cy="125" r="115"></circle>
-      <circle id="progress" class="progress" cx="125" cy="125" r="115"></circle>
-    </svg>
-    <div class="time-text">
-      <div class="time" id="time">25:00</div>
-      <div class="mode" id="mode">FOCUS</div>
-    </div>
-  </div>
-
-  <div class="controls">
-    <button class="start" id="startBtn">START</button>
-    <button class="pause" id="pauseBtn">PAUSE</button>
-    <button class="reset" id="resetBtn">RESET</button>
-  </div>
-
-  <div class="settings">
-    <div class="inputs">
-      <div class="input-box">
-        <label>Work (min)</label>
-        <input type="number" id="workMin" value="25" min="1">
+      <div class="circle-wrapper">
+        <svg viewBox="0 0 250 250">
+          <circle class="bg" cx="125" cy="125" r="115"></circle>
+          <circle id="progress" class="progress" cx="125" cy="125" r="115"></circle>
+        </svg>
+        <div class="time-text">
+          <div class="time" id="time">25:00</div>
+          <div class="mode" id="mode">집중</div>
+        </div>
       </div>
-      <div class="input-box">
-        <label>Break (min)</label>
-        <input type="number" id="breakMin" value="5" min="1">
+
+      <div class="controls">
+        <button class="start" id="startBtn">시작</button>
+        <button class="pause" id="pauseBtn">일시정지</button>
+        <button class="reset" id="resetBtn">초기화</button>
+      </div>
+
+      <div class="settings">
+        <div class="inputs">
+          <div class="input-box">
+            <label>집중 시간 (분)</label>
+            <input type="number" id="workMin" value="25" min="1">
+          </div>
+          <div class="input-box">
+            <label>휴식 시간 (분)</label>
+            <input type="number" id="breakMin" value="5" min="1">
+          </div>
+        </div>
+
+        <label class="sound-toggle">
+          <input type="checkbox" id="soundOn" checked>
+          알람 소리 켜기
+        </label>
+      </div>
+    </div>
+  </section>
+
+  <!-- Ad Unit -->
+  <div class="ad-container">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-8685691842167676"
+         data-ad-slot="auto"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
+  </div>
+
+  <!-- About Pomodoro Section -->
+  <section id="about">
+    <h2>뽀모도로 기법이란?</h2>
+    <p>뽀모도로 기법(Pomodoro Technique)은 1980년대 후반 이탈리아의 프란체스코 시릴로(Francesco Cirillo)가 개발한 시간 관리 방법론입니다. '뽀모도로'는 이탈리아어로 '토마토'를 뜻하며, 시릴로가 대학생 시절 사용했던 토마토 모양 주방 타이머에서 이름을 따왔습니다.</p>
+
+    <div class="highlight-box">
+      <p><strong>핵심 원리:</strong> 25분간 집중해서 작업하고, 5분간 휴식을 취하는 사이클을 반복합니다. 이 한 사이클을 '1 뽀모도로'라고 부릅니다.</p>
+    </div>
+
+    <h3>왜 25분인가요?</h3>
+    <p>인간의 집중력은 일반적으로 20-30분 후 급격히 저하됩니다. 25분은 집중력을 최대로 유지하면서도 의미 있는 작업을 완료할 수 있는 최적의 시간으로 알려져 있습니다. 과학적 연구에 따르면, 짧은 휴식을 통해 뇌가 정보를 정리하고 다음 집중 세션을 위한 에너지를 충전할 수 있습니다.</p>
+
+    <h3>뽀모도로의 역사</h3>
+    <p>프란체스코 시릴로는 대학교 1학년 때 학업에 집중하지 못하는 자신을 발견했습니다. 그는 "과연 10분이라도 집중할 수 있을까?"라는 의문을 품고, 주방에서 토마토 모양 타이머를 가져와 실험을 시작했습니다. 이 단순한 도전이 오늘날 전 세계 수백만 명이 사용하는 생산성 기법으로 발전했습니다.</p>
+  </section>
+
+  <!-- How to Use Section -->
+  <section id="how-to-use">
+    <h2>뽀모도로 타이머 사용법</h2>
+
+    <h3>기본 사용법</h3>
+    <ol>
+      <li><strong>할 일을 정하세요:</strong> 오늘 완료할 작업을 명확하게 정의합니다.</li>
+      <li><strong>타이머를 25분으로 설정하세요:</strong> 위 타이머에서 '시작' 버튼을 누르면 됩니다.</li>
+      <li><strong>작업에 완전히 집중하세요:</strong> 타이머가 울릴 때까지 다른 것에 신경 쓰지 마세요.</li>
+      <li><strong>타이머가 울리면 휴식하세요:</strong> 5분간 짧은 휴식을 취합니다.</li>
+      <li><strong>4번 반복 후 긴 휴식:</strong> 4 뽀모도로를 완료하면 15-30분 긴 휴식을 취하세요.</li>
+    </ol>
+
+    <h3>타이머 설정 방법</h3>
+    <ul>
+      <li><strong>집중 시간:</strong> 기본값은 25분이지만, 본인에게 맞게 조절할 수 있습니다.</li>
+      <li><strong>휴식 시간:</strong> 기본값은 5분입니다. 필요에 따라 조절하세요.</li>
+      <li><strong>알람 소리:</strong> 체크박스로 알람 소리를 켜거나 끌 수 있습니다.</li>
+    </ul>
+
+    <div class="highlight-box">
+      <p><strong>Pro Tip:</strong> 처음에는 25분이 길게 느껴질 수 있습니다. 15분부터 시작해서 점차 늘려가는 것도 좋은 방법입니다!</p>
+    </div>
+  </section>
+
+  <!-- Benefits Section -->
+  <section id="benefits">
+    <h2>뽀모도로 기법의 효과</h2>
+    <p>전 세계 수백만 명의 학생, 직장인, 프리랜서들이 뽀모도로 기법을 통해 생산성을 높이고 있습니다.</p>
+
+    <div class="benefits-grid">
+      <div class="benefit-card">
+        <div class="icon">🎯</div>
+        <h4>집중력 향상</h4>
+        <p>명확한 시간 제한이 집중력을 극대화합니다.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon">⚡</div>
+        <h4>생산성 증가</h4>
+        <p>작업을 작은 단위로 나눠 효율적으로 처리합니다.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon">🧘</div>
+        <h4>번아웃 방지</h4>
+        <p>정기적인 휴식으로 정신적 피로를 줄입니다.</p>
+      </div>
+      <div class="benefit-card">
+        <div class="icon">📊</div>
+        <h4>시간 인식 개선</h4>
+        <p>작업에 소요되는 시간을 정확히 파악할 수 있습니다.</p>
       </div>
     </div>
 
-    <label class="sound-toggle">
-      <input type="checkbox" id="soundOn" checked>
-      Enable Alarm Sound
-    </label>
+    <h3>과학적 근거</h3>
+    <p>뽀모도로 기법은 다음과 같은 심리학적 원리에 기반합니다:</p>
+    <ul>
+      <li><strong>시간 제한 효과 (Timeboxing):</strong> 마감 시간이 있으면 작업에 더 집중하게 됩니다.</li>
+      <li><strong>분산 학습 (Spaced Learning):</strong> 휴식을 통해 뇌가 정보를 더 효과적으로 저장합니다.</li>
+      <li><strong>파킨슨 법칙 극복:</strong> "일은 주어진 시간만큼 늘어난다"는 법칙을 25분 제한으로 방지합니다.</li>
+      <li><strong>몰입 상태 (Flow State):</strong> 짧은 집중 세션이 몰입 상태에 들어가기 쉽게 만듭니다.</li>
+    </ul>
+  </section>
+
+  <!-- Tips Section -->
+  <section id="tips">
+    <h2>뽀모도로 활용 팁</h2>
+
+    <h3>효과적인 활용을 위한 팁</h3>
+    <ol>
+      <li><strong>방해 요소를 미리 차단하세요:</strong> 휴대폰은 무음으로, 불필요한 탭은 닫아두세요.</li>
+      <li><strong>작업을 미리 계획하세요:</strong> 뽀모도로를 시작하기 전에 무엇을 할지 명확히 정하세요.</li>
+      <li><strong>휴식 시간을 지키세요:</strong> 휴식도 생산성의 일부입니다. 건너뛰지 마세요.</li>
+      <li><strong>휴식 시간에는 화면에서 벗어나세요:</strong> 스트레칭, 물 마시기, 창밖 바라보기 등을 추천합니다.</li>
+      <li><strong>완료한 뽀모도로를 기록하세요:</strong> 하루에 몇 뽀모도로를 완료했는지 추적하면 동기부여가 됩니다.</li>
+    </ol>
+
+    <h3>이런 분들께 추천합니다</h3>
+    <ul>
+      <li>시험 공부 중인 학생</li>
+      <li>재택근무 중인 직장인</li>
+      <li>집중력이 필요한 창작 활동을 하는 분</li>
+      <li>프로젝트 마감에 쫓기는 프리랜서</li>
+      <li>새로운 기술을 학습 중인 분</li>
+    </ul>
+
+    <div class="highlight-box">
+      <p><strong>주의:</strong> 뽀모도로는 도구일 뿐입니다. 모든 상황에 적합한 것은 아니며, 본인에게 맞게 조절해서 사용하세요. 창의적인 작업이나 깊은 몰입이 필요한 경우 더 긴 집중 시간이 효과적일 수 있습니다.</p>
+    </div>
+  </section>
+
+  <!-- Second Ad Unit -->
+  <div class="ad-container">
+    <ins class="adsbygoogle"
+         style="display:block"
+         data-ad-client="ca-pub-8685691842167676"
+         data-ad-slot="auto"
+         data-ad-format="auto"
+         data-full-width-responsive="true"></ins>
+    <script>
+         (adsbygoogle = window.adsbygoogle || []).push({});
+    </script>
   </div>
+
+  <!-- Privacy Policy Section -->
+  <section id="privacy">
+    <h2>개인정보처리방침</h2>
+    <p><strong>최종 수정일:</strong> 2025년 1월</p>
+
+    <h3>수집하는 정보</h3>
+    <p>본 웹사이트는 사용자로부터 직접적인 개인정보를 수집하지 않습니다. 타이머 설정값은 사용자의 브라우저에만 저장되며, 서버로 전송되지 않습니다.</p>
+
+    <h3>광고 및 쿠키</h3>
+    <p>본 사이트는 Google AdSense를 사용하여 광고를 게재합니다. Google은 사용자의 관심사에 기반한 광고를 표시하기 위해 쿠키를 사용할 수 있습니다. 사용자는 <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener">Google 광고 설정</a>에서 맞춤 광고를 비활성화할 수 있습니다.</p>
+
+    <h3>제3자 서비스</h3>
+    <p>본 사이트는 다음 제3자 서비스를 사용합니다:</p>
+    <ul>
+      <li><strong>Google AdSense:</strong> 광고 게재를 위해 사용됩니다.</li>
+      <li><strong>GitHub Pages:</strong> 웹사이트 호스팅에 사용됩니다.</li>
+    </ul>
+
+    <h3>문의</h3>
+    <p>개인정보 관련 문의사항이 있으시면 GitHub 저장소의 Issues를 통해 연락해 주세요.</p>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="footer-links">
+      <a href="#timer">타이머</a>
+      <a href="#about">뽀모도로란?</a>
+      <a href="#privacy">개인정보처리방침</a>
+    </div>
+    <p>&copy; 2025 뽀모도로 타이머. All rights reserved.</p>
+    <p>이 사이트는 무료로 제공되며, 생산성 향상을 위해 누구나 사용할 수 있습니다.</p>
+  </footer>
 </div>
 
 <audio id="alarm">
@@ -249,14 +600,14 @@
   function switchMode() {
     if (soundOn.checked) alarm.play().catch(() => {});
     isWork = !isWork;
-    
+
     if (isWork) {
       totalSec = workInput.value * 60;
-      modeEl.textContent = "FOCUS";
+      modeEl.textContent = "집중";
       progressCircle.style.stroke = "var(--work-color)";
     } else {
       totalSec = breakInput.value * 60;
-      modeEl.textContent = "BREAK";
+      modeEl.textContent = "휴식";
       progressCircle.style.stroke = "var(--break-color)";
     }
     currentSec = totalSec;
@@ -290,7 +641,7 @@
     isWork = true;
     totalSec = workInput.value * 60;
     currentSec = totalSec;
-    modeEl.textContent = "FOCUS";
+    modeEl.textContent = "집중";
     progressCircle.style.stroke = "var(--work-color)";
     updateDisplay();
   };
