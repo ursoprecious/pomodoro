@@ -88,53 +88,37 @@
     position: relative;
   }
 
-  .lang-btn {
+  .lang-select {
     background: var(--card-bg);
     border: 1px solid #334155;
     color: var(--text-main);
-    padding: 6px 12px;
+    padding: 8px 12px;
     border-radius: 8px;
     cursor: pointer;
     font-size: 0.85rem;
-    display: flex;
-    align-items: center;
-    gap: 6px;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2394a3b8' d='M6 8L1 3h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat;
+    background-position: right 10px center;
+    padding-right: 30px;
+    min-width: 120px;
   }
 
-  .lang-btn:hover {
+  .lang-select:hover {
     border-color: var(--work-color);
   }
 
-  .lang-dropdown {
-    position: absolute;
-    top: 100%;
-    right: 0;
+  .lang-select:focus {
+    outline: none;
+    border-color: var(--work-color);
+  }
+
+  .lang-select option {
     background: var(--card-bg);
-    border: 1px solid #334155;
-    border-radius: 8px;
-    margin-top: 4px;
-    display: none;
-    min-width: 120px;
-    overflow: hidden;
-  }
-
-  .lang-dropdown.show {
-    display: block;
-  }
-
-  .lang-option {
-    padding: 8px 12px;
-    cursor: pointer;
-    font-size: 0.85rem;
-    transition: background 0.2s;
-  }
-
-  .lang-option:hover {
-    background: #334155;
-  }
-
-  .lang-option.active {
-    color: var(--work-color);
+    color: var(--text-main);
+    padding: 8px;
   }
 
   /* Main Container */
@@ -416,17 +400,13 @@
       <li><a href="#tips" data-i18n="nav.tips">Tips</a></li>
     </ul>
     <div class="lang-selector">
-      <button class="lang-btn" id="langBtn">
-        <span id="currentLang">English</span>
-        <span>▼</span>
-      </button>
-      <div class="lang-dropdown" id="langDropdown">
-        <div class="lang-option" data-lang="en">English</div>
-        <div class="lang-option" data-lang="ko">한국어</div>
-        <div class="lang-option" data-lang="ja">日本語</div>
-        <div class="lang-option" data-lang="zh">中文</div>
-        <div class="lang-option" data-lang="es">Español</div>
-      </div>
+      <select class="lang-select" id="langSelect">
+        <option value="en">English</option>
+        <option value="ko">한국어</option>
+        <option value="ja">日本語</option>
+        <option value="zh">中文</option>
+        <option value="es">Español</option>
+      </select>
     </div>
   </div>
 </nav>
@@ -1153,8 +1133,9 @@ function updateLanguage(lang) {
   // Update HTML lang attribute
   document.documentElement.lang = lang;
 
-  // Update current language display
-  document.getElementById('currentLang').textContent = i18n[lang].langName;
+  // Update select element
+  const selectEl = document.getElementById('langSelect');
+  if (selectEl) selectEl.value = lang;
 
   // Update all elements with data-i18n attribute
   document.querySelectorAll('[data-i18n]').forEach(el => {
@@ -1163,11 +1144,6 @@ function updateLanguage(lang) {
     if (text) {
       el.innerHTML = text;
     }
-  });
-
-  // Update active language in dropdown
-  document.querySelectorAll('.lang-option').forEach(opt => {
-    opt.classList.toggle('active', opt.dataset.lang === lang);
   });
 
   // Update timer mode display
@@ -1185,23 +1161,10 @@ function updateModeDisplay() {
 }
 
 // Language selector functionality
-document.getElementById('langBtn').addEventListener('click', (e) => {
-  e.stopPropagation();
-  document.getElementById('langDropdown').classList.toggle('show');
-});
-
-document.querySelectorAll('.lang-option').forEach(option => {
-  option.addEventListener('click', () => {
-    updateLanguage(option.dataset.lang);
-    document.getElementById('langDropdown').classList.remove('show');
-  });
-});
-
-// Close dropdown when clicking outside
-document.addEventListener('click', (e) => {
-  if (!e.target.closest('.lang-selector')) {
-    document.getElementById('langDropdown').classList.remove('show');
-  }
+const langSelect = document.getElementById('langSelect');
+langSelect.value = currentLang;
+langSelect.addEventListener('change', (e) => {
+  updateLanguage(e.target.value);
 });
 
 // Timer functionality
