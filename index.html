@@ -1185,7 +1185,8 @@ function updateModeDisplay() {
 }
 
 // Language selector functionality
-document.getElementById('langBtn').addEventListener('click', () => {
+document.getElementById('langBtn').addEventListener('click', (e) => {
+  e.stopPropagation();
   document.getElementById('langDropdown').classList.toggle('show');
 });
 
