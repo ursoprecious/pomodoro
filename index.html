@@ -1,6 +1,15 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-TXKQSDVEX9"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+
+  gtag('config', 'G-TXKQSDVEX9');
+</script>
 <meta charset="UTF-8">
 <title>Pomodoro Timer - Free Online Focus Timer for Productivity</title>
 <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
@@ -332,6 +341,26 @@
     flex-wrap: wrap;
   }
 
+  /* Language Selector */
+  .lang-selector {
+    position: relative;
+  }
+
+  .lang-selector select {
+    background: var(--card-bg);
+    color: var(--text-main);
+    border: 1px solid #334155;
+    padding: 6px 12px;
+    border-radius: 8px;
+    font-size: 0.85rem;
+    cursor: pointer;
+    outline: none;
+  }
+
+  .lang-selector select:hover {
+    border-color: var(--work-color);
+  }
+
   /* Responsive */
   @media (max-width: 600px) {
     nav ul {
@@ -358,12 +387,21 @@
 <nav>
   <div class="nav-container">
     <ul>
-      <li><a href="#timer">Timer</a></li>
-      <li><a href="#about">What is Pomodoro?</a></li>
-      <li><a href="#how-to-use">How to Use</a></li>
-      <li><a href="#benefits">Benefits</a></li>
-      <li><a href="#tips">Tips</a></li>
+      <li><a href="#timer" data-i18n="nav.timer">Timer</a></li>
+      <li><a href="#about" data-i18n="nav.about">What is Pomodoro?</a></li>
+      <li><a href="#how-to-use" data-i18n="nav.howToUse">How to Use</a></li>
+      <li><a href="#benefits" data-i18n="nav.benefits">Benefits</a></li>
+      <li><a href="#tips" data-i18n="nav.tips">Tips</a></li>
     </ul>
+    <div class="lang-selector">
+      <select id="langSelect">
+        <option value="en">English</option>
+        <option value="ko">한국어</option>
+        <option value="ja">日本語</option>
+        <option value="zh">中文</option>
+        <option value="es">Español</option>
+      </select>
+    </div>
   </div>
 </nav>
 
@@ -372,8 +410,8 @@
   <section class="hero" id="timer">
     <div class="timer-container">
       <header>
-        <h1>Pomodoro Timer</h1>
-        <p>Perfect Balance of Focus & Rest</p>
+        <h1 data-i18n="timer.title">Pomodoro Timer</h1>
+        <p data-i18n="timer.subtitle">Perfect Balance of Focus & Rest</p>
       </header>
 
       <div class="circle-wrapper">
@@ -383,31 +421,31 @@
         </svg>
         <div class="time-text">
           <div class="time" id="time">25:00</div>
-          <div class="mode" id="mode">FOCUS</div>
+          <div class="mode" id="mode" data-i18n="timer.focus">FOCUS</div>
         </div>
       </div>
 
       <div class="controls">
-        <button class="start" id="startBtn">START</button>
-        <button class="pause" id="pauseBtn">PAUSE</button>
-        <button class="reset" id="resetBtn">RESET</button>
+        <button class="start" id="startBtn" data-i18n="timer.start">START</button>
+        <button class="pause" id="pauseBtn" data-i18n="timer.pause">PAUSE</button>
+        <button class="reset" id="resetBtn" data-i18n="timer.reset">RESET</button>
       </div>
 
       <div class="settings">
         <div class="inputs">
           <div class="input-box">
-            <label>Work (min)</label>
+            <label data-i18n="timer.workTime">Work (min)</label>
             <input type="number" id="workMin" value="25" min="1">
           </div>
           <div class="input-box">
-            <label>Break (min)</label>
+            <label data-i18n="timer.breakTime">Break (min)</label>
             <input type="number" id="breakMin" value="5" min="1">
           </div>
         </div>
 
         <label class="sound-toggle">
           <input type="checkbox" id="soundOn" checked>
-          <span>Enable Alarm Sound</span>
+          <span data-i18n="timer.enableSound">Enable Alarm Sound</span>
         </label>
       </div>
     </div>
@@ -428,107 +466,107 @@
 
   <!-- About Pomodoro Section -->
   <section id="about">
-    <h2>What is the Pomodoro Technique?</h2>
-    <p>The Pomodoro Technique is a time management method developed by Francesco Cirillo in the late 1980s. The name "Pomodoro" comes from the Italian word for "tomato," inspired by the tomato-shaped kitchen timer Cirillo used as a university student.</p>
+    <h2 data-i18n="about.title">What is the Pomodoro Technique?</h2>
+    <p data-i18n="about.intro">The Pomodoro Technique is a time management method developed by Francesco Cirillo in the late 1980s. The name "Pomodoro" comes from the Italian word for "tomato," inspired by the tomato-shaped kitchen timer Cirillo used as a university student.</p>
 
     <div class="highlight-box">
-      <p><strong>Core Principle:</strong> Work with full concentration for 25 minutes, then take a 5-minute break. This cycle is called "1 Pomodoro."</p>
+      <p data-i18n="about.corePrinciple"><strong>Core Principle:</strong> Work with full concentration for 25 minutes, then take a 5-minute break. This cycle is called "1 Pomodoro."</p>
     </div>
 
-    <h3>Why 25 Minutes?</h3>
-    <p>Human concentration typically drops significantly after 20-30 minutes. 25 minutes is known as the optimal time to maintain maximum focus while completing meaningful work. Scientific research shows that short breaks allow the brain to organize information and recharge for the next focus session.</p>
+    <h3 data-i18n="about.why25Title">Why 25 Minutes?</h3>
+    <p data-i18n="about.why25Text">Human concentration typically drops significantly after 20-30 minutes. 25 minutes is known as the optimal time to maintain maximum focus while completing meaningful work. Scientific research shows that short breaks allow the brain to organize information and recharge for the next focus session.</p>
 
-    <h3>History of Pomodoro</h3>
-    <p>Francesco Cirillo discovered he couldn't focus on his studies during his first year of university. He wondered, "Can I even concentrate for just 10 minutes?" He grabbed a tomato-shaped timer from the kitchen and began his experiment. This simple challenge evolved into a productivity technique used by millions worldwide today.</p>
+    <h3 data-i18n="about.historyTitle">History of Pomodoro</h3>
+    <p data-i18n="about.historyText">Francesco Cirillo discovered he couldn't focus on his studies during his first year of university. He wondered, "Can I even concentrate for just 10 minutes?" He grabbed a tomato-shaped timer from the kitchen and began his experiment. This simple challenge evolved into a productivity technique used by millions worldwide today.</p>
   </section>
 
   <!-- How to Use Section -->
   <section id="how-to-use">
-    <h2>How to Use the Pomodoro Timer</h2>
+    <h2 data-i18n="howToUse.title">How to Use the Pomodoro Timer</h2>
 
-    <h3>Basic Usage</h3>
+    <h3 data-i18n="howToUse.basicTitle">Basic Usage</h3>
     <ol>
-      <li><strong>Choose your task:</strong> Clearly define what you want to accomplish today.</li>
-      <li><strong>Set the timer for 25 minutes:</strong> Simply press the 'START' button above.</li>
-      <li><strong>Focus completely on your task:</strong> Don't let anything distract you until the timer rings.</li>
-      <li><strong>Take a break when the timer rings:</strong> Enjoy a short 5-minute break.</li>
-      <li><strong>Take a longer break after 4 cycles:</strong> After completing 4 Pomodoros, take a 15-30 minute break.</li>
+      <li data-i18n="howToUse.step1"><strong>Choose your task:</strong> Clearly define what you want to accomplish today.</li>
+      <li data-i18n="howToUse.step2"><strong>Set the timer for 25 minutes:</strong> Simply press the 'START' button above.</li>
+      <li data-i18n="howToUse.step3"><strong>Focus completely on your task:</strong> Don't let anything distract you until the timer rings.</li>
+      <li data-i18n="howToUse.step4"><strong>Take a break when the timer rings:</strong> Enjoy a short 5-minute break.</li>
+      <li data-i18n="howToUse.step5"><strong>Take a longer break after 4 cycles:</strong> After completing 4 Pomodoros, take a 15-30 minute break.</li>
     </ol>
 
-    <h3>Timer Settings</h3>
+    <h3 data-i18n="howToUse.settingsTitle">Timer Settings</h3>
     <ul>
-      <li><strong>Focus Time:</strong> Default is 25 minutes, but you can adjust it to suit your needs.</li>
-      <li><strong>Break Time:</strong> Default is 5 minutes. Adjust as needed.</li>
-      <li><strong>Alarm Sound:</strong> Toggle the alarm sound on or off with the checkbox.</li>
+      <li data-i18n="howToUse.setting1"><strong>Focus Time:</strong> Default is 25 minutes, but you can adjust it to suit your needs.</li>
+      <li data-i18n="howToUse.setting2"><strong>Break Time:</strong> Default is 5 minutes. Adjust as needed.</li>
+      <li data-i18n="howToUse.setting3"><strong>Alarm Sound:</strong> Toggle the alarm sound on or off with the checkbox.</li>
     </ul>
 
     <div class="highlight-box">
-      <p><strong>Pro Tip:</strong> If 25 minutes feels too long at first, start with 15 minutes and gradually increase!</p>
+      <p data-i18n="howToUse.proTip"><strong>Pro Tip:</strong> If 25 minutes feels too long at first, start with 15 minutes and gradually increase!</p>
     </div>
   </section>
 
   <!-- Benefits Section -->
   <section id="benefits">
-    <h2>Benefits of the Pomodoro Technique</h2>
-    <p>Millions of students, professionals, and freelancers worldwide boost their productivity using the Pomodoro Technique.</p>
+    <h2 data-i18n="benefits.title">Benefits of the Pomodoro Technique</h2>
+    <p data-i18n="benefits.intro">Millions of students, professionals, and freelancers worldwide boost their productivity using the Pomodoro Technique.</p>
 
     <div class="benefits-grid">
       <div class="benefit-card">
         <div class="icon">🎯</div>
-        <h4>Improved Focus</h4>
-        <p>Clear time limits maximize your concentration.</p>
+        <h4 data-i18n="benefits.focus">Improved Focus</h4>
+        <p data-i18n="benefits.focusDesc">Clear time limits maximize your concentration.</p>
       </div>
       <div class="benefit-card">
         <div class="icon">⚡</div>
-        <h4>Increased Productivity</h4>
-        <p>Breaking tasks into small units makes work more efficient.</p>
+        <h4 data-i18n="benefits.productivity">Increased Productivity</h4>
+        <p data-i18n="benefits.productivityDesc">Breaking tasks into small units makes work more efficient.</p>
       </div>
       <div class="benefit-card">
         <div class="icon">🧘</div>
-        <h4>Burnout Prevention</h4>
-        <p>Regular breaks reduce mental fatigue.</p>
+        <h4 data-i18n="benefits.burnout">Burnout Prevention</h4>
+        <p data-i18n="benefits.burnoutDesc">Regular breaks reduce mental fatigue.</p>
       </div>
       <div class="benefit-card">
         <div class="icon">📊</div>
-        <h4>Better Time Awareness</h4>
-        <p>Accurately track how long tasks actually take.</p>
+        <h4 data-i18n="benefits.timeAwareness">Better Time Awareness</h4>
+        <p data-i18n="benefits.timeAwarenessDesc">Accurately track how long tasks actually take.</p>
       </div>
     </div>
 
-    <h3>Scientific Basis</h3>
-    <p>The Pomodoro Technique is based on these psychological principles:</p>
+    <h3 data-i18n="benefits.scienceTitle">Scientific Basis</h3>
+    <p data-i18n="benefits.scienceIntro">The Pomodoro Technique is based on these psychological principles:</p>
     <ul>
-      <li><strong>Timeboxing:</strong> Having a deadline increases focus on the task.</li>
-      <li><strong>Spaced Learning:</strong> Breaks help the brain store information more effectively.</li>
-      <li><strong>Overcoming Parkinson's Law:</strong> The 25-minute limit prevents work from expanding to fill available time.</li>
-      <li><strong>Flow State:</strong> Short focus sessions make it easier to enter a state of flow.</li>
+      <li data-i18n="benefits.science1"><strong>Timeboxing:</strong> Having a deadline increases focus on the task.</li>
+      <li data-i18n="benefits.science2"><strong>Spaced Learning:</strong> Breaks help the brain store information more effectively.</li>
+      <li data-i18n="benefits.science3"><strong>Overcoming Parkinson's Law:</strong> The 25-minute limit prevents work from expanding to fill available time.</li>
+      <li data-i18n="benefits.science4"><strong>Flow State:</strong> Short focus sessions make it easier to enter a state of flow.</li>
     </ul>
   </section>
 
   <!-- Tips Section -->
   <section id="tips">
-    <h2>Pomodoro Tips</h2>
+    <h2 data-i18n="tips.title">Pomodoro Tips</h2>
 
-    <h3>Tips for Effective Use</h3>
+    <h3 data-i18n="tips.effectiveTitle">Tips for Effective Use</h3>
     <ol>
-      <li><strong>Block distractions in advance:</strong> Put your phone on silent and close unnecessary tabs.</li>
-      <li><strong>Plan your tasks ahead:</strong> Know exactly what you'll work on before starting a Pomodoro.</li>
-      <li><strong>Respect your break time:</strong> Breaks are part of productivity. Don't skip them.</li>
-      <li><strong>Step away from the screen during breaks:</strong> Stretch, drink water, or look out the window.</li>
-      <li><strong>Track your completed Pomodoros:</strong> Counting how many you complete each day is motivating.</li>
+      <li data-i18n="tips.tip1"><strong>Block distractions in advance:</strong> Put your phone on silent and close unnecessary tabs.</li>
+      <li data-i18n="tips.tip2"><strong>Plan your tasks ahead:</strong> Know exactly what you'll work on before starting a Pomodoro.</li>
+      <li data-i18n="tips.tip3"><strong>Respect your break time:</strong> Breaks are part of productivity. Don't skip them.</li>
+      <li data-i18n="tips.tip4"><strong>Step away from the screen during breaks:</strong> Stretch, drink water, or look out the window.</li>
+      <li data-i18n="tips.tip5"><strong>Track your completed Pomodoros:</strong> Counting how many you complete each day is motivating.</li>
     </ol>
 
-    <h3>Recommended For</h3>
+    <h3 data-i18n="tips.recommendTitle">Recommended For</h3>
     <ul>
-      <li>Students preparing for exams</li>
-      <li>Remote workers</li>
-      <li>Creative professionals needing focus</li>
-      <li>Freelancers with project deadlines</li>
-      <li>Anyone learning new skills</li>
+      <li data-i18n="tips.recommend1">Students preparing for exams</li>
+      <li data-i18n="tips.recommend2">Remote workers</li>
+      <li data-i18n="tips.recommend3">Creative professionals needing focus</li>
+      <li data-i18n="tips.recommend4">Freelancers with project deadlines</li>
+      <li data-i18n="tips.recommend5">Anyone learning new skills</li>
     </ul>
 
     <div class="highlight-box">
-      <p><strong>Note:</strong> The Pomodoro Technique is just a tool. It's not suitable for every situation, so adjust it to fit your needs. For creative work or deep focus, longer concentration periods may be more effective.</p>
+      <p data-i18n="tips.note"><strong>Note:</strong> The Pomodoro Technique is just a tool. It's not suitable for every situation, so adjust it to fit your needs. For creative work or deep focus, longer concentration periods may be more effective.</p>
     </div>
   </section>
 
@@ -547,35 +585,35 @@
 
   <!-- Privacy Policy Section -->
   <section id="privacy">
-    <h2>Privacy Policy</h2>
-    <p><strong>Last Updated:</strong> January 2025</p>
+    <h2 data-i18n="privacy.title">Privacy Policy</h2>
+    <p><strong data-i18n="privacy.lastUpdated">Last Updated:</strong> January 2025</p>
 
-    <h3>Information We Collect</h3>
-    <p>This website does not collect personal information directly from users. Timer settings are stored only in your browser and are not transmitted to any server.</p>
+    <h3 data-i18n="privacy.collectTitle">Information We Collect</h3>
+    <p data-i18n="privacy.collectText">This website does not collect personal information directly from users. Timer settings are stored only in your browser and are not transmitted to any server.</p>
 
-    <h3>Advertising & Cookies</h3>
-    <p>This site uses Google AdSense for advertising. Google may use cookies to display ads based on your interests. You can disable personalized ads in your <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener">Google Ads Settings</a>.</p>
+    <h3 data-i18n="privacy.adsTitle">Advertising & Cookies</h3>
+    <p data-i18n="privacy.adsText">This site uses Google AdSense for advertising. Google may use cookies to display ads based on your interests. You can disable personalized ads in your <a href="https://www.google.com/settings/ads" target="_blank" rel="noopener">Google Ads Settings</a>.</p>
 
-    <h3>Third-Party Services</h3>
-    <p>This site uses the following third-party services:</p>
+    <h3 data-i18n="privacy.thirdPartyTitle">Third-Party Services</h3>
+    <p data-i18n="privacy.thirdPartyIntro">This site uses the following third-party services:</p>
     <ul>
-      <li><strong>Google AdSense:</strong> Used for displaying advertisements.</li>
-      <li><strong>GitHub Pages:</strong> Used for website hosting.</li>
+      <li data-i18n="privacy.thirdParty1"><strong>Google AdSense:</strong> Used for displaying advertisements.</li>
+      <li data-i18n="privacy.thirdParty2"><strong>GitHub Pages:</strong> Used for website hosting.</li>
     </ul>
 
-    <h3>Contact</h3>
-    <p>For privacy-related inquiries, please contact us through the GitHub repository Issues.</p>
+    <h3 data-i18n="privacy.contactTitle">Contact</h3>
+    <p data-i18n="privacy.contactText">For privacy-related inquiries, please contact us through the GitHub repository Issues.</p>
   </section>
 
   <!-- Footer -->
   <footer>
     <div class="footer-links">
-      <a href="#timer">Timer</a>
-      <a href="#about">What is Pomodoro?</a>
-      <a href="#privacy">Privacy Policy</a>
+      <a href="#timer" data-i18n="nav.timer">Timer</a>
+      <a href="#about" data-i18n="nav.about">What is Pomodoro?</a>
+      <a href="#privacy" data-i18n="privacy.title">Privacy Policy</a>
     </div>
-    <p>© 2025 Pomodoro Timer. All rights reserved.</p>
-    <p>This site is free to use and helps anyone improve their productivity.</p>
+    <p data-i18n="footer.copyright">© 2025 Pomodoro Timer. All rights reserved.</p>
+    <p data-i18n="footer.freeUse">This site is free to use and helps anyone improve their productivity.</p>
   </footer>
 </div>
 
@@ -660,12 +698,446 @@ document.getElementById("resetBtn").onclick = () => {
   totalSec = workInput.value * 60;
   currentSec = totalSec;
   progressCircle.style.stroke = "var(--work-color)";
-  modeEl.textContent = "FOCUS";
+  modeEl.textContent = translations[currentLang]["timer.focus"];
   updateDisplay();
 };
 
 // Initialize
 updateDisplay();
+
+// i18n Translations
+const translations = {
+  en: {
+    "nav.timer": "Timer",
+    "nav.about": "What is Pomodoro?",
+    "nav.howToUse": "How to Use",
+    "nav.benefits": "Benefits",
+    "nav.tips": "Tips",
+    "timer.title": "Pomodoro Timer",
+    "timer.subtitle": "Perfect Balance of Focus & Rest",
+    "timer.focus": "FOCUS",
+    "timer.break": "BREAK",
+    "timer.start": "START",
+    "timer.pause": "PAUSE",
+    "timer.reset": "RESET",
+    "timer.workTime": "Work (min)",
+    "timer.breakTime": "Break (min)",
+    "timer.enableSound": "Enable Alarm Sound",
+    "about.title": "What is the Pomodoro Technique?",
+    "about.intro": "The Pomodoro Technique is a time management method developed by Francesco Cirillo in the late 1980s. The name \"Pomodoro\" comes from the Italian word for \"tomato,\" inspired by the tomato-shaped kitchen timer Cirillo used as a university student.",
+    "about.corePrinciple": "<strong>Core Principle:</strong> Work with full concentration for 25 minutes, then take a 5-minute break. This cycle is called \"1 Pomodoro.\"",
+    "about.why25Title": "Why 25 Minutes?",
+    "about.why25Text": "Human concentration typically drops significantly after 20-30 minutes. 25 minutes is known as the optimal time to maintain maximum focus while completing meaningful work. Scientific research shows that short breaks allow the brain to organize information and recharge for the next focus session.",
+    "about.historyTitle": "History of Pomodoro",
+    "about.historyText": "Francesco Cirillo discovered he couldn't focus on his studies during his first year of university. He wondered, \"Can I even concentrate for just 10 minutes?\" He grabbed a tomato-shaped timer from the kitchen and began his experiment. This simple challenge evolved into a productivity technique used by millions worldwide today.",
+    "howToUse.title": "How to Use the Pomodoro Timer",
+    "howToUse.basicTitle": "Basic Usage",
+    "howToUse.step1": "<strong>Choose your task:</strong> Clearly define what you want to accomplish today.",
+    "howToUse.step2": "<strong>Set the timer for 25 minutes:</strong> Simply press the 'START' button above.",
+    "howToUse.step3": "<strong>Focus completely on your task:</strong> Don't let anything distract you until the timer rings.",
+    "howToUse.step4": "<strong>Take a break when the timer rings:</strong> Enjoy a short 5-minute break.",
+    "howToUse.step5": "<strong>Take a longer break after 4 cycles:</strong> After completing 4 Pomodoros, take a 15-30 minute break.",
+    "howToUse.settingsTitle": "Timer Settings",
+    "howToUse.setting1": "<strong>Focus Time:</strong> Default is 25 minutes, but you can adjust it to suit your needs.",
+    "howToUse.setting2": "<strong>Break Time:</strong> Default is 5 minutes. Adjust as needed.",
+    "howToUse.setting3": "<strong>Alarm Sound:</strong> Toggle the alarm sound on or off with the checkbox.",
+    "howToUse.proTip": "<strong>Pro Tip:</strong> If 25 minutes feels too long at first, start with 15 minutes and gradually increase!",
+    "benefits.title": "Benefits of the Pomodoro Technique",
+    "benefits.intro": "Millions of students, professionals, and freelancers worldwide boost their productivity using the Pomodoro Technique.",
+    "benefits.focus": "Improved Focus",
+    "benefits.focusDesc": "Clear time limits maximize your concentration.",
+    "benefits.productivity": "Increased Productivity",
+    "benefits.productivityDesc": "Breaking tasks into small units makes work more efficient.",
+    "benefits.burnout": "Burnout Prevention",
+    "benefits.burnoutDesc": "Regular breaks reduce mental fatigue.",
+    "benefits.timeAwareness": "Better Time Awareness",
+    "benefits.timeAwarenessDesc": "Accurately track how long tasks actually take.",
+    "benefits.scienceTitle": "Scientific Basis",
+    "benefits.scienceIntro": "The Pomodoro Technique is based on these psychological principles:",
+    "benefits.science1": "<strong>Timeboxing:</strong> Having a deadline increases focus on the task.",
+    "benefits.science2": "<strong>Spaced Learning:</strong> Breaks help the brain store information more effectively.",
+    "benefits.science3": "<strong>Overcoming Parkinson's Law:</strong> The 25-minute limit prevents work from expanding to fill available time.",
+    "benefits.science4": "<strong>Flow State:</strong> Short focus sessions make it easier to enter a state of flow.",
+    "tips.title": "Pomodoro Tips",
+    "tips.effectiveTitle": "Tips for Effective Use",
+    "tips.tip1": "<strong>Block distractions in advance:</strong> Put your phone on silent and close unnecessary tabs.",
+    "tips.tip2": "<strong>Plan your tasks ahead:</strong> Know exactly what you'll work on before starting a Pomodoro.",
+    "tips.tip3": "<strong>Respect your break time:</strong> Breaks are part of productivity. Don't skip them.",
+    "tips.tip4": "<strong>Step away from the screen during breaks:</strong> Stretch, drink water, or look out the window.",
+    "tips.tip5": "<strong>Track your completed Pomodoros:</strong> Counting how many you complete each day is motivating.",
+    "tips.recommendTitle": "Recommended For",
+    "tips.recommend1": "Students preparing for exams",
+    "tips.recommend2": "Remote workers",
+    "tips.recommend3": "Creative professionals needing focus",
+    "tips.recommend4": "Freelancers with project deadlines",
+    "tips.recommend5": "Anyone learning new skills",
+    "tips.note": "<strong>Note:</strong> The Pomodoro Technique is just a tool. It's not suitable for every situation, so adjust it to fit your needs. For creative work or deep focus, longer concentration periods may be more effective.",
+    "privacy.title": "Privacy Policy",
+    "privacy.lastUpdated": "Last Updated:",
+    "privacy.collectTitle": "Information We Collect",
+    "privacy.collectText": "This website does not collect personal information directly from users. Timer settings are stored only in your browser and are not transmitted to any server.",
+    "privacy.adsTitle": "Advertising & Cookies",
+    "privacy.adsText": "This site uses Google AdSense for advertising. Google may use cookies to display ads based on your interests. You can disable personalized ads in your <a href=\"https://www.google.com/settings/ads\" target=\"_blank\" rel=\"noopener\">Google Ads Settings</a>.",
+    "privacy.thirdPartyTitle": "Third-Party Services",
+    "privacy.thirdPartyIntro": "This site uses the following third-party services:",
+    "privacy.thirdParty1": "<strong>Google AdSense:</strong> Used for displaying advertisements.",
+    "privacy.thirdParty2": "<strong>GitHub Pages:</strong> Used for website hosting.",
+    "privacy.contactTitle": "Contact",
+    "privacy.contactText": "For privacy-related inquiries, please contact us through the GitHub repository Issues.",
+    "footer.copyright": "© 2025 Pomodoro Timer. All rights reserved.",
+    "footer.freeUse": "This site is free to use and helps anyone improve their productivity."
+  },
+  ko: {
+    "nav.timer": "타이머",
+    "nav.about": "뽀모도로란?",
+    "nav.howToUse": "사용법",
+    "nav.benefits": "장점",
+    "nav.tips": "팁",
+    "timer.title": "뽀모도로 타이머",
+    "timer.subtitle": "집중과 휴식의 완벽한 균형",
+    "timer.focus": "집중",
+    "timer.break": "휴식",
+    "timer.start": "시작",
+    "timer.pause": "일시정지",
+    "timer.reset": "초기화",
+    "timer.workTime": "작업 (분)",
+    "timer.breakTime": "휴식 (분)",
+    "timer.enableSound": "알람 소리 켜기",
+    "about.title": "뽀모도로 기법이란?",
+    "about.intro": "뽀모도로 기법은 1980년대 후반 프란체스코 시릴로가 개발한 시간 관리 방법입니다. \"뽀모도로\"라는 이름은 시릴로가 대학생 시절 사용했던 토마토 모양 주방 타이머에서 유래했습니다.",
+    "about.corePrinciple": "<strong>핵심 원리:</strong> 25분간 완전히 집중해서 일하고, 5분간 휴식합니다. 이 사이클을 \"1 뽀모도로\"라고 합니다.",
+    "about.why25Title": "왜 25분일까요?",
+    "about.why25Text": "인간의 집중력은 보통 20-30분 후에 크게 떨어집니다. 25분은 최대 집중력을 유지하면서 의미 있는 작업을 완료할 수 있는 최적의 시간으로 알려져 있습니다. 과학적 연구에 따르면 짧은 휴식은 뇌가 정보를 정리하고 다음 집중 세션을 위해 재충전하는 데 도움이 됩니다.",
+    "about.historyTitle": "뽀모도로의 역사",
+    "about.historyText": "프란체스코 시릴로는 대학교 1학년 때 공부에 집중할 수 없다는 것을 깨달았습니다. \"10분이라도 집중할 수 있을까?\"라고 생각하며 부엌에서 토마토 모양 타이머를 가져와 실험을 시작했습니다. 이 간단한 도전은 오늘날 전 세계 수백만 명이 사용하는 생산성 기법으로 발전했습니다.",
+    "howToUse.title": "뽀모도로 타이머 사용법",
+    "howToUse.basicTitle": "기본 사용법",
+    "howToUse.step1": "<strong>할 일 선택:</strong> 오늘 완료할 작업을 명확히 정의합니다.",
+    "howToUse.step2": "<strong>타이머를 25분으로 설정:</strong> 위의 '시작' 버튼을 누르면 됩니다.",
+    "howToUse.step3": "<strong>작업에 완전히 집중:</strong> 타이머가 울릴 때까지 어떤 것도 방해하지 못하게 합니다.",
+    "howToUse.step4": "<strong>타이머가 울리면 휴식:</strong> 짧은 5분 휴식을 즐깁니다.",
+    "howToUse.step5": "<strong>4사이클 후 긴 휴식:</strong> 4 뽀모도로를 완료한 후 15-30분 휴식을 취합니다.",
+    "howToUse.settingsTitle": "타이머 설정",
+    "howToUse.setting1": "<strong>집중 시간:</strong> 기본값은 25분이지만, 필요에 따라 조절할 수 있습니다.",
+    "howToUse.setting2": "<strong>휴식 시간:</strong> 기본값은 5분입니다. 필요에 따라 조절하세요.",
+    "howToUse.setting3": "<strong>알람 소리:</strong> 체크박스로 알람 소리를 켜거나 끌 수 있습니다.",
+    "howToUse.proTip": "<strong>Pro Tip:</strong> 처음에 25분이 너무 길게 느껴지면 15분부터 시작해서 점진적으로 늘려보세요!",
+    "benefits.title": "뽀모도로 기법의 장점",
+    "benefits.intro": "전 세계 수백만 명의 학생, 직장인, 프리랜서들이 뽀모도로 기법으로 생산성을 높이고 있습니다.",
+    "benefits.focus": "집중력 향상",
+    "benefits.focusDesc": "명확한 시간 제한이 집중력을 극대화합니다.",
+    "benefits.productivity": "생산성 증가",
+    "benefits.productivityDesc": "작업을 작은 단위로 나누면 더 효율적으로 일할 수 있습니다.",
+    "benefits.burnout": "번아웃 예방",
+    "benefits.burnoutDesc": "정기적인 휴식이 정신적 피로를 줄여줍니다.",
+    "benefits.timeAwareness": "시간 인식 개선",
+    "benefits.timeAwarenessDesc": "작업에 실제로 걸리는 시간을 정확히 파악할 수 있습니다.",
+    "benefits.scienceTitle": "과학적 근거",
+    "benefits.scienceIntro": "뽀모도로 기법은 다음과 같은 심리학적 원리에 기반합니다:",
+    "benefits.science1": "<strong>타임박싱:</strong> 마감 시간이 있으면 작업에 대한 집중도가 높아집니다.",
+    "benefits.science2": "<strong>분산 학습:</strong> 휴식은 뇌가 정보를 더 효과적으로 저장하도록 돕습니다.",
+    "benefits.science3": "<strong>파킨슨 법칙 극복:</strong> 25분 제한은 일이 가용 시간만큼 늘어나는 것을 방지합니다.",
+    "benefits.science4": "<strong>몰입 상태:</strong> 짧은 집중 세션은 몰입 상태에 더 쉽게 들어갈 수 있게 합니다.",
+    "tips.title": "뽀모도로 팁",
+    "tips.effectiveTitle": "효과적인 사용을 위한 팁",
+    "tips.tip1": "<strong>미리 방해 요소 차단:</strong> 휴대폰을 무음으로 하고 불필요한 탭을 닫으세요.",
+    "tips.tip2": "<strong>작업을 미리 계획:</strong> 뽀모도로를 시작하기 전에 정확히 무엇을 할지 알고 있어야 합니다.",
+    "tips.tip3": "<strong>휴식 시간 존중:</strong> 휴식도 생산성의 일부입니다. 건너뛰지 마세요.",
+    "tips.tip4": "<strong>휴식 중 화면에서 벗어나기:</strong> 스트레칭하거나, 물을 마시거나, 창밖을 바라보세요.",
+    "tips.tip5": "<strong>완료한 뽀모도로 추적:</strong> 매일 몇 개를 완료했는지 세는 것이 동기 부여가 됩니다.",
+    "tips.recommendTitle": "추천 대상",
+    "tips.recommend1": "시험 준비하는 학생",
+    "tips.recommend2": "재택 근무자",
+    "tips.recommend3": "집중이 필요한 창작 전문가",
+    "tips.recommend4": "프로젝트 마감이 있는 프리랜서",
+    "tips.recommend5": "새로운 기술을 배우는 모든 사람",
+    "tips.note": "<strong>참고:</strong> 뽀모도로 기법은 도구일 뿐입니다. 모든 상황에 적합하지 않으니 필요에 따라 조절하세요. 창작 작업이나 깊은 집중이 필요한 경우 더 긴 집중 시간이 효과적일 수 있습니다.",
+    "privacy.title": "개인정보 처리방침",
+    "privacy.lastUpdated": "최종 수정일:",
+    "privacy.collectTitle": "수집하는 정보",
+    "privacy.collectText": "이 웹사이트는 사용자로부터 직접 개인정보를 수집하지 않습니다. 타이머 설정은 브라우저에만 저장되며 서버로 전송되지 않습니다.",
+    "privacy.adsTitle": "광고 및 쿠키",
+    "privacy.adsText": "이 사이트는 광고를 위해 Google AdSense를 사용합니다. Google은 쿠키를 사용하여 관심사에 기반한 광고를 표시할 수 있습니다. <a href=\"https://www.google.com/settings/ads\" target=\"_blank\" rel=\"noopener\">Google 광고 설정</a>에서 맞춤 광고를 비활성화할 수 있습니다.",
+    "privacy.thirdPartyTitle": "제3자 서비스",
+    "privacy.thirdPartyIntro": "이 사이트는 다음 제3자 서비스를 사용합니다:",
+    "privacy.thirdParty1": "<strong>Google AdSense:</strong> 광고 표시에 사용됩니다.",
+    "privacy.thirdParty2": "<strong>GitHub Pages:</strong> 웹사이트 호스팅에 사용됩니다.",
+    "privacy.contactTitle": "문의",
+    "privacy.contactText": "개인정보 관련 문의는 GitHub 저장소 Issues를 통해 연락해 주세요.",
+    "footer.copyright": "© 2025 뽀모도로 타이머. All rights reserved.",
+    "footer.freeUse": "이 사이트는 무료로 사용할 수 있으며 누구나 생산성을 높이는 데 도움이 됩니다."
+  },
+  ja: {
+    "nav.timer": "タイマー",
+    "nav.about": "ポモドーロとは？",
+    "nav.howToUse": "使い方",
+    "nav.benefits": "メリット",
+    "nav.tips": "ヒント",
+    "timer.title": "ポモドーロタイマー",
+    "timer.subtitle": "集中と休憩の完璧なバランス",
+    "timer.focus": "集中",
+    "timer.break": "休憩",
+    "timer.start": "スタート",
+    "timer.pause": "一時停止",
+    "timer.reset": "リセット",
+    "timer.workTime": "作業（分）",
+    "timer.breakTime": "休憩（分）",
+    "timer.enableSound": "アラーム音を有効にする",
+    "about.title": "ポモドーロ・テクニックとは？",
+    "about.intro": "ポモドーロ・テクニックは、1980年代後半にフランチェスコ・シリロが開発した時間管理法です。「ポモドーロ」という名前は、シリロが大学生時代に使っていたトマト型キッチンタイマーに由来しています。",
+    "about.corePrinciple": "<strong>基本原則：</strong>25分間完全に集中して作業し、5分間休憩します。このサイクルを「1ポモドーロ」と呼びます。",
+    "about.why25Title": "なぜ25分なのか？",
+    "about.why25Text": "人間の集中力は通常20〜30分後に大幅に低下します。25分は、最大限の集中力を維持しながら意味のある作業を完了するのに最適な時間として知られています。科学的研究によると、短い休憩は脳が情報を整理し、次の集中セッションに向けて充電するのに役立ちます。",
+    "about.historyTitle": "ポモドーロの歴史",
+    "about.historyText": "フランチェスコ・シリロは大学1年生の時、勉強に集中できないことに気づきました。「10分でも集中できるだろうか？」と考え、キッチンからトマト型タイマーを持ってきて実験を始めました。このシンプルな挑戦は、今日世界中で何百万人もの人々が使用する生産性テクニックへと発展しました。",
+    "howToUse.title": "ポモドーロタイマーの使い方",
+    "howToUse.basicTitle": "基本的な使い方",
+    "howToUse.step1": "<strong>タスクを選ぶ：</strong>今日達成したいことを明確に定義します。",
+    "howToUse.step2": "<strong>タイマーを25分にセット：</strong>上の「スタート」ボタンを押すだけです。",
+    "howToUse.step3": "<strong>タスクに完全に集中：</strong>タイマーが鳴るまで何にも邪魔されないようにします。",
+    "howToUse.step4": "<strong>タイマーが鳴ったら休憩：</strong>5分間の短い休憩を楽しみます。",
+    "howToUse.step5": "<strong>4サイクル後に長い休憩：</strong>4ポモドーロを完了したら、15〜30分の休憩を取ります。",
+    "howToUse.settingsTitle": "タイマー設定",
+    "howToUse.setting1": "<strong>集中時間：</strong>デフォルトは25分ですが、必要に応じて調整できます。",
+    "howToUse.setting2": "<strong>休憩時間：</strong>デフォルトは5分です。必要に応じて調整してください。",
+    "howToUse.setting3": "<strong>アラーム音：</strong>チェックボックスでアラーム音のオン/オフを切り替えられます。",
+    "howToUse.proTip": "<strong>Pro Tip：</strong>最初は25分が長く感じたら、15分から始めて徐々に増やしていきましょう！",
+    "benefits.title": "ポモドーロ・テクニックのメリット",
+    "benefits.intro": "世界中の何百万人もの学生、社会人、フリーランサーがポモドーロ・テクニックで生産性を向上させています。",
+    "benefits.focus": "集中力の向上",
+    "benefits.focusDesc": "明確な時間制限が集中力を最大化します。",
+    "benefits.productivity": "生産性の向上",
+    "benefits.productivityDesc": "タスクを小さな単位に分けることで、より効率的に作業できます。",
+    "benefits.burnout": "バーンアウト防止",
+    "benefits.burnoutDesc": "定期的な休憩が精神的な疲労を軽減します。",
+    "benefits.timeAwareness": "時間意識の改善",
+    "benefits.timeAwarenessDesc": "タスクにかかる実際の時間を正確に把握できます。",
+    "benefits.scienceTitle": "科学的根拠",
+    "benefits.scienceIntro": "ポモドーロ・テクニックは以下の心理学的原理に基づいています：",
+    "benefits.science1": "<strong>タイムボクシング：</strong>締め切りがあるとタスクへの集中度が高まります。",
+    "benefits.science2": "<strong>分散学習：</strong>休憩は脳がより効果的に情報を保存するのに役立ちます。",
+    "benefits.science3": "<strong>パーキンソンの法則の克服：</strong>25分の制限は、仕事が利用可能な時間いっぱいに膨らむのを防ぎます。",
+    "benefits.science4": "<strong>フロー状態：</strong>短い集中セッションはフロー状態に入りやすくします。",
+    "tips.title": "ポモドーロのヒント",
+    "tips.effectiveTitle": "効果的に使うためのヒント",
+    "tips.tip1": "<strong>事前に気を散らすものをブロック：</strong>スマホをサイレントにし、不要なタブを閉じましょう。",
+    "tips.tip2": "<strong>タスクを事前に計画：</strong>ポモドーロを始める前に、何をするか正確に把握しておきましょう。",
+    "tips.tip3": "<strong>休憩時間を尊重：</strong>休憩も生産性の一部です。スキップしないでください。",
+    "tips.tip4": "<strong>休憩中は画面から離れる：</strong>ストレッチしたり、水を飲んだり、窓の外を見たりしましょう。",
+    "tips.tip5": "<strong>完了したポモドーロを追跡：</strong>毎日いくつ完了したかを数えるとモチベーションになります。",
+    "tips.recommendTitle": "おすすめの人",
+    "tips.recommend1": "試験勉強中の学生",
+    "tips.recommend2": "リモートワーカー",
+    "tips.recommend3": "集中が必要なクリエイティブ職",
+    "tips.recommend4": "プロジェクト締め切りのあるフリーランサー",
+    "tips.recommend5": "新しいスキルを学んでいる人",
+    "tips.note": "<strong>注意：</strong>ポモドーロ・テクニックはあくまでツールです。すべての状況に適しているわけではないので、必要に応じて調整してください。クリエイティブな作業や深い集中が必要な場合は、より長い集中時間が効果的かもしれません。",
+    "privacy.title": "プライバシーポリシー",
+    "privacy.lastUpdated": "最終更新日：",
+    "privacy.collectTitle": "収集する情報",
+    "privacy.collectText": "このウェブサイトはユーザーから直接個人情報を収集しません。タイマー設定はブラウザにのみ保存され、サーバーには送信されません。",
+    "privacy.adsTitle": "広告とCookie",
+    "privacy.adsText": "このサイトは広告にGoogle AdSenseを使用しています。Googleはお客様の興味に基づいた広告を表示するためにCookieを使用する場合があります。<a href=\"https://www.google.com/settings/ads\" target=\"_blank\" rel=\"noopener\">Google広告設定</a>でパーソナライズ広告を無効にできます。",
+    "privacy.thirdPartyTitle": "サードパーティサービス",
+    "privacy.thirdPartyIntro": "このサイトは以下のサードパーティサービスを使用しています：",
+    "privacy.thirdParty1": "<strong>Google AdSense：</strong>広告表示に使用。",
+    "privacy.thirdParty2": "<strong>GitHub Pages：</strong>ウェブサイトホスティングに使用。",
+    "privacy.contactTitle": "お問い合わせ",
+    "privacy.contactText": "プライバシーに関するお問い合わせは、GitHubリポジトリのIssuesからご連絡ください。",
+    "footer.copyright": "© 2025 ポモドーロタイマー。All rights reserved.",
+    "footer.freeUse": "このサイトは無料で使用でき、誰でも生産性を向上させることができます。"
+  },
+  zh: {
+    "nav.timer": "计时器",
+    "nav.about": "什么是番茄钟？",
+    "nav.howToUse": "使用方法",
+    "nav.benefits": "优势",
+    "nav.tips": "技巧",
+    "timer.title": "番茄钟计时器",
+    "timer.subtitle": "专注与休息的完美平衡",
+    "timer.focus": "专注",
+    "timer.break": "休息",
+    "timer.start": "开始",
+    "timer.pause": "暂停",
+    "timer.reset": "重置",
+    "timer.workTime": "工作（分钟）",
+    "timer.breakTime": "休息（分钟）",
+    "timer.enableSound": "启用提醒声音",
+    "about.title": "什么是番茄工作法？",
+    "about.intro": "番茄工作法是弗朗西斯科·西里洛在1980年代后期开发的一种时间管理方法。\"番茄钟\"这个名字来源于西里洛大学时期使用的番茄形厨房计时器。",
+    "about.corePrinciple": "<strong>核心原则：</strong>全神贯注工作25分钟，然后休息5分钟。这个周期被称为\"1个番茄钟\"。",
+    "about.why25Title": "为什么是25分钟？",
+    "about.why25Text": "人类的注意力通常在20-30分钟后会显著下降。25分钟被认为是保持最大专注力同时完成有意义工作的最佳时间。科学研究表明，短暂的休息可以帮助大脑整理信息并为下一个专注时段充电。",
+    "about.historyTitle": "番茄钟的历史",
+    "about.historyText": "弗朗西斯科·西里洛在大学一年级时发现自己无法集中精力学习。他想：\"我能集中注意力10分钟吗？\"于是从厨房拿来一个番茄形计时器开始实验。这个简单的挑战演变成了今天全球数百万人使用的生产力技术。",
+    "howToUse.title": "番茄钟计时器使用方法",
+    "howToUse.basicTitle": "基本用法",
+    "howToUse.step1": "<strong>选择任务：</strong>明确定义你今天要完成的工作。",
+    "howToUse.step2": "<strong>设置25分钟计时：</strong>只需按上方的\"开始\"按钮。",
+    "howToUse.step3": "<strong>完全专注于任务：</strong>在计时器响起之前不要让任何事情打扰你。",
+    "howToUse.step4": "<strong>计时器响起时休息：</strong>享受5分钟的短暂休息。",
+    "howToUse.step5": "<strong>4个周期后长休息：</strong>完成4个番茄钟后，休息15-30分钟。",
+    "howToUse.settingsTitle": "计时器设置",
+    "howToUse.setting1": "<strong>专注时间：</strong>默认25分钟，可根据需要调整。",
+    "howToUse.setting2": "<strong>休息时间：</strong>默认5分钟，可根据需要调整。",
+    "howToUse.setting3": "<strong>提醒声音：</strong>使用复选框开启或关闭提醒声音。",
+    "howToUse.proTip": "<strong>专业提示：</strong>如果一开始觉得25分钟太长，可以从15分钟开始，逐渐增加！",
+    "benefits.title": "番茄工作法的优势",
+    "benefits.intro": "全球数百万学生、专业人士和自由职业者使用番茄工作法提高生产力。",
+    "benefits.focus": "提高专注力",
+    "benefits.focusDesc": "明确的时间限制最大化你的注意力。",
+    "benefits.productivity": "提高生产力",
+    "benefits.productivityDesc": "将任务分成小单元使工作更高效。",
+    "benefits.burnout": "预防倦怠",
+    "benefits.burnoutDesc": "定期休息减少精神疲劳。",
+    "benefits.timeAwareness": "更好的时间意识",
+    "benefits.timeAwarenessDesc": "准确了解任务实际需要的时间。",
+    "benefits.scienceTitle": "科学依据",
+    "benefits.scienceIntro": "番茄工作法基于以下心理学原理：",
+    "benefits.science1": "<strong>时间盒：</strong>有截止时间会增加对任务的专注度。",
+    "benefits.science2": "<strong>分散学习：</strong>休息帮助大脑更有效地存储信息。",
+    "benefits.science3": "<strong>克服帕金森定律：</strong>25分钟限制防止工作膨胀到填满可用时间。",
+    "benefits.science4": "<strong>心流状态：</strong>短时间专注更容易进入心流状态。",
+    "tips.title": "番茄钟技巧",
+    "tips.effectiveTitle": "有效使用的技巧",
+    "tips.tip1": "<strong>提前阻断干扰：</strong>将手机静音并关闭不必要的标签页。",
+    "tips.tip2": "<strong>提前计划任务：</strong>在开始番茄钟之前确切知道要做什么。",
+    "tips.tip3": "<strong>尊重休息时间：</strong>休息是生产力的一部分，不要跳过。",
+    "tips.tip4": "<strong>休息时远离屏幕：</strong>伸展身体、喝水或看看窗外。",
+    "tips.tip5": "<strong>追踪完成的番茄钟：</strong>计算每天完成多少个可以激励自己。",
+    "tips.recommendTitle": "推荐人群",
+    "tips.recommend1": "备考学生",
+    "tips.recommend2": "远程工作者",
+    "tips.recommend3": "需要专注的创意工作者",
+    "tips.recommend4": "有项目截止日期的自由职业者",
+    "tips.recommend5": "学习新技能的任何人",
+    "tips.note": "<strong>注意：</strong>番茄工作法只是一个工具。它不适合所有情况，请根据需要调整。对于创意工作或需要深度专注的情况，更长的专注时间可能更有效。",
+    "privacy.title": "隐私政策",
+    "privacy.lastUpdated": "最后更新：",
+    "privacy.collectTitle": "我们收集的信息",
+    "privacy.collectText": "本网站不直接从用户收集个人信息。计时器设置仅存储在您的浏览器中，不会传输到任何服务器。",
+    "privacy.adsTitle": "广告和Cookie",
+    "privacy.adsText": "本网站使用Google AdSense进行广告。Google可能会使用Cookie根据您的兴趣显示广告。您可以在<a href=\"https://www.google.com/settings/ads\" target=\"_blank\" rel=\"noopener\">Google广告设置</a>中禁用个性化广告。",
+    "privacy.thirdPartyTitle": "第三方服务",
+    "privacy.thirdPartyIntro": "本网站使用以下第三方服务：",
+    "privacy.thirdParty1": "<strong>Google AdSense：</strong>用于显示广告。",
+    "privacy.thirdParty2": "<strong>GitHub Pages：</strong>用于网站托管。",
+    "privacy.contactTitle": "联系方式",
+    "privacy.contactText": "如有隐私相关问题，请通过GitHub仓库的Issues联系我们。",
+    "footer.copyright": "© 2025 番茄钟计时器。保留所有权利。",
+    "footer.freeUse": "本网站免费使用，帮助任何人提高生产力。"
+  },
+  es: {
+    "nav.timer": "Temporizador",
+    "nav.about": "¿Qué es Pomodoro?",
+    "nav.howToUse": "Cómo Usar",
+    "nav.benefits": "Beneficios",
+    "nav.tips": "Consejos",
+    "timer.title": "Temporizador Pomodoro",
+    "timer.subtitle": "El equilibrio perfecto entre concentración y descanso",
+    "timer.focus": "ENFOQUE",
+    "timer.break": "DESCANSO",
+    "timer.start": "INICIAR",
+    "timer.pause": "PAUSAR",
+    "timer.reset": "REINICIAR",
+    "timer.workTime": "Trabajo (min)",
+    "timer.breakTime": "Descanso (min)",
+    "timer.enableSound": "Activar sonido de alarma",
+    "about.title": "¿Qué es la Técnica Pomodoro?",
+    "about.intro": "La Técnica Pomodoro es un método de gestión del tiempo desarrollado por Francesco Cirillo a finales de los años 80. El nombre \"Pomodoro\" viene de la palabra italiana para \"tomate\", inspirado en el temporizador de cocina con forma de tomate que Cirillo usaba cuando era estudiante universitario.",
+    "about.corePrinciple": "<strong>Principio básico:</strong> Trabaja con concentración total durante 25 minutos, luego toma un descanso de 5 minutos. Este ciclo se llama \"1 Pomodoro\".",
+    "about.why25Title": "¿Por qué 25 minutos?",
+    "about.why25Text": "La concentración humana típicamente disminuye significativamente después de 20-30 minutos. 25 minutos se conoce como el tiempo óptimo para mantener la máxima concentración mientras se completa un trabajo significativo. La investigación científica muestra que los descansos cortos permiten al cerebro organizar la información y recargarse para la siguiente sesión de concentración.",
+    "about.historyTitle": "Historia del Pomodoro",
+    "about.historyText": "Francesco Cirillo descubrió que no podía concentrarse en sus estudios durante su primer año de universidad. Se preguntó: \"¿Puedo concentrarme aunque sea 10 minutos?\" Tomó un temporizador con forma de tomate de la cocina y comenzó su experimento. Este simple desafío evolucionó hasta convertirse en una técnica de productividad utilizada por millones en todo el mundo hoy en día.",
+    "howToUse.title": "Cómo usar el Temporizador Pomodoro",
+    "howToUse.basicTitle": "Uso básico",
+    "howToUse.step1": "<strong>Elige tu tarea:</strong> Define claramente lo que quieres lograr hoy.",
+    "howToUse.step2": "<strong>Configura el temporizador a 25 minutos:</strong> Simplemente presiona el botón 'INICIAR' de arriba.",
+    "howToUse.step3": "<strong>Concéntrate completamente en tu tarea:</strong> No dejes que nada te distraiga hasta que suene el temporizador.",
+    "howToUse.step4": "<strong>Toma un descanso cuando suene:</strong> Disfruta de un breve descanso de 5 minutos.",
+    "howToUse.step5": "<strong>Toma un descanso más largo después de 4 ciclos:</strong> Después de completar 4 Pomodoros, toma un descanso de 15-30 minutos.",
+    "howToUse.settingsTitle": "Configuración del temporizador",
+    "howToUse.setting1": "<strong>Tiempo de concentración:</strong> Por defecto son 25 minutos, pero puedes ajustarlo según tus necesidades.",
+    "howToUse.setting2": "<strong>Tiempo de descanso:</strong> Por defecto son 5 minutos. Ajústalo según necesites.",
+    "howToUse.setting3": "<strong>Sonido de alarma:</strong> Activa o desactiva el sonido de alarma con la casilla.",
+    "howToUse.proTip": "<strong>Consejo Pro:</strong> Si 25 minutos te parece demasiado al principio, ¡empieza con 15 minutos y aumenta gradualmente!",
+    "benefits.title": "Beneficios de la Técnica Pomodoro",
+    "benefits.intro": "Millones de estudiantes, profesionales y freelancers en todo el mundo aumentan su productividad usando la Técnica Pomodoro.",
+    "benefits.focus": "Mayor concentración",
+    "benefits.focusDesc": "Los límites de tiempo claros maximizan tu concentración.",
+    "benefits.productivity": "Mayor productividad",
+    "benefits.productivityDesc": "Dividir las tareas en pequeñas unidades hace el trabajo más eficiente.",
+    "benefits.burnout": "Prevención del agotamiento",
+    "benefits.burnoutDesc": "Los descansos regulares reducen la fatiga mental.",
+    "benefits.timeAwareness": "Mejor conciencia del tiempo",
+    "benefits.timeAwarenessDesc": "Rastrea con precisión cuánto tiempo realmente toman las tareas.",
+    "benefits.scienceTitle": "Base científica",
+    "benefits.scienceIntro": "La Técnica Pomodoro se basa en estos principios psicológicos:",
+    "benefits.science1": "<strong>Timeboxing:</strong> Tener una fecha límite aumenta la concentración en la tarea.",
+    "benefits.science2": "<strong>Aprendizaje espaciado:</strong> Los descansos ayudan al cerebro a almacenar información más eficazmente.",
+    "benefits.science3": "<strong>Superar la Ley de Parkinson:</strong> El límite de 25 minutos evita que el trabajo se expanda para llenar el tiempo disponible.",
+    "benefits.science4": "<strong>Estado de flujo:</strong> Las sesiones cortas de concentración facilitan entrar en estado de flujo.",
+    "tips.title": "Consejos Pomodoro",
+    "tips.effectiveTitle": "Consejos para un uso efectivo",
+    "tips.tip1": "<strong>Bloquea las distracciones por adelantado:</strong> Pon tu teléfono en silencio y cierra las pestañas innecesarias.",
+    "tips.tip2": "<strong>Planifica tus tareas con anticipación:</strong> Sabe exactamente en qué trabajarás antes de comenzar un Pomodoro.",
+    "tips.tip3": "<strong>Respeta tu tiempo de descanso:</strong> Los descansos son parte de la productividad. No los saltes.",
+    "tips.tip4": "<strong>Aléjate de la pantalla durante los descansos:</strong> Estírate, bebe agua o mira por la ventana.",
+    "tips.tip5": "<strong>Registra tus Pomodoros completados:</strong> Contar cuántos completas cada día es motivador.",
+    "tips.recommendTitle": "Recomendado para",
+    "tips.recommend1": "Estudiantes preparando exámenes",
+    "tips.recommend2": "Trabajadores remotos",
+    "tips.recommend3": "Profesionales creativos que necesitan concentración",
+    "tips.recommend4": "Freelancers con fechas límite de proyectos",
+    "tips.recommend5": "Cualquiera aprendiendo nuevas habilidades",
+    "tips.note": "<strong>Nota:</strong> La Técnica Pomodoro es solo una herramienta. No es adecuada para todas las situaciones, así que ajústala a tus necesidades. Para trabajo creativo o concentración profunda, períodos de concentración más largos pueden ser más efectivos.",
+    "privacy.title": "Política de Privacidad",
+    "privacy.lastUpdated": "Última actualización:",
+    "privacy.collectTitle": "Información que recopilamos",
+    "privacy.collectText": "Este sitio web no recopila información personal directamente de los usuarios. La configuración del temporizador se almacena solo en tu navegador y no se transmite a ningún servidor.",
+    "privacy.adsTitle": "Publicidad y Cookies",
+    "privacy.adsText": "Este sitio usa Google AdSense para publicidad. Google puede usar cookies para mostrar anuncios basados en tus intereses. Puedes desactivar los anuncios personalizados en tu <a href=\"https://www.google.com/settings/ads\" target=\"_blank\" rel=\"noopener\">Configuración de anuncios de Google</a>.",
+    "privacy.thirdPartyTitle": "Servicios de terceros",
+    "privacy.thirdPartyIntro": "Este sitio utiliza los siguientes servicios de terceros:",
+    "privacy.thirdParty1": "<strong>Google AdSense:</strong> Usado para mostrar anuncios.",
+    "privacy.thirdParty2": "<strong>GitHub Pages:</strong> Usado para el alojamiento del sitio web.",
+    "privacy.contactTitle": "Contacto",
+    "privacy.contactText": "Para consultas relacionadas con la privacidad, contáctanos a través de los Issues del repositorio de GitHub.",
+    "footer.copyright": "© 2025 Temporizador Pomodoro. Todos los derechos reservados.",
+    "footer.freeUse": "Este sitio es gratuito y ayuda a cualquiera a mejorar su productividad."
+  }
+};
+
+let currentLang = localStorage.getItem('lang') || 'en';
+
+function setLanguage(lang) {
+  currentLang = lang;
+  localStorage.setItem('lang', lang);
+  document.documentElement.lang = lang;
+
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    const key = el.getAttribute('data-i18n');
+    if (translations[lang] && translations[lang][key]) {
+      el.innerHTML = translations[lang][key];
+    }
+  });
+
+  // Update mode text based on current state
+  if (isWork) {
+    modeEl.textContent = translations[lang]["timer.focus"];
+  } else {
+    modeEl.textContent = translations[lang]["timer.break"];
+  }
+}
+
+// Language selector
+const langSelect = document.getElementById('langSelect');
+langSelect.value = currentLang;
+langSelect.addEventListener('change', (e) => setLanguage(e.target.value));
+
+// Initialize language
+setLanguage(currentLang);
 </script>
 </body>
 </html>
