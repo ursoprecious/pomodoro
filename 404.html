@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Page Not Found - Pomodoro Timer</title>
+<meta name="robots" content="noindex, nofollow">
+<link rel="icon" type="image/svg+xml" href="/pomodoro/favicon.svg">
+<link rel="canonical" href="https://ursoprecious.github.io/pomodoro/">
+<style>
+  :root {
+    --bg-color: #0f172a;
+    --card-bg: #1e293b;
+    --work-color: #22c55e;
+    --text-main: #ffffff;
+    --text-dim: #94a3b8;
+  }
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  body {
+    font-family: system-ui, -apple-system, sans-serif;
+    background: var(--bg-color);
+    color: var(--text-main);
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    text-align: center;
+  }
+  .container {
+    max-width: 500px;
+  }
+  .error-code {
+    font-size: 8rem;
+    font-weight: 800;
+    color: var(--work-color);
+    line-height: 1;
+    margin-bottom: 1rem;
+  }
+  h1 {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+  }
+  p {
+    color: var(--text-dim);
+    margin-bottom: 2rem;
+    line-height: 1.6;
+  }
+  .btn {
+    display: inline-block;
+    background: var(--work-color);
+    color: white;
+    text-decoration: none;
+    padding: 12px 32px;
+    border-radius: 12px;
+    font-weight: 600;
+    transition: transform 0.2s, opacity 0.2s;
+  }
+  .btn:hover {
+    transform: scale(1.05);
+    opacity: 0.9;
+  }
+  .links {
+    margin-top: 2rem;
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    flex-wrap: wrap;
+  }
+  .links a {
+    color: var(--text-dim);
+    text-decoration: none;
+    font-size: 0.9rem;
+  }
+  .links a:hover {
+    color: var(--work-color);
+  }
+  .tomato {
+    font-size: 4rem;
+    margin-bottom: 1rem;
+  }
+</style>
+</head>
+<body>
+  <div class="container">
+    <div class="tomato">🍅</div>
+    <div class="error-code">404</div>
+    <h1>Page Not Found</h1>
+    <p>Oops! The page you're looking for doesn't exist. Maybe it's time for a break? Head back to the timer and stay productive!</p>
+    <a href="/pomodoro/" class="btn">Go to Pomodoro Timer</a>
+    <nav class="links">
+      <a href="/pomodoro/#about">What is Pomodoro?</a>
+      <a href="/pomodoro/#how-to-use">How to Use</a>
+      <a href="/pomodoro/#tips">Tips</a>
+    </nav>
+  </div>
+</body>
+</html>
