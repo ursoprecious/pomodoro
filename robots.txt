@@ -1,4 +1,27 @@
+# Robots.txt for Pomodoro Timer
+# https://ursoprecious.github.io/pomodoro/
+
 User-agent: *
 Allow: /
 
+# Sitemap location
 Sitemap: https://ursoprecious.github.io/pomodoro/sitemap.xml
+
+# Crawl-delay (optional, for politeness)
+Crawl-delay: 1
+
+# Google specific
+User-agent: Googlebot
+Allow: /
+
+# Bing specific
+User-agent: Bingbot
+Allow: /
+
+# Naver specific
+User-agent: Yeti
+Allow: /
+
+# Daum specific
+User-agent: Daumoa
+Allow: /

@@ -1,0 +1,20 @@
+{
+  "name": "Pomodoro Timer - Focus & Productivity",
+  "short_name": "Pomodoro Timer",
+  "description": "Free online Pomodoro Timer to boost your focus and productivity. Use the scientifically proven 25-minute focus, 5-minute break technique.",
+  "start_url": "/pomodoro/",
+  "display": "standalone",
+  "background_color": "#0f172a",
+  "theme_color": "#0f172a",
+  "orientation": "portrait-primary",
+  "categories": ["productivity", "utilities"],
+  "lang": "en",
+  "icons": [
+    {
+      "src": "favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ]
+}

@@ -1,0 +1,48 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="630" viewBox="0 0 1200 630">
+  <!-- Background -->
+  <rect width="1200" height="630" fill="#0f172a"/>
+
+  <!-- Grid pattern overlay -->
+  <defs>
+    <pattern id="grid" width="40" height="40" patternUnits="userSpaceOnUse">
+      <path d="M 40 0 L 0 0 0 40" fill="none" stroke="#1e293b" stroke-width="1"/>
+    </pattern>
+  </defs>
+  <rect width="1200" height="630" fill="url(#grid)" opacity="0.5"/>
+
+  <!-- Timer Circle -->
+  <circle cx="600" cy="280" r="150" fill="none" stroke="#334155" stroke-width="16"/>
+  <circle cx="600" cy="280" r="150" fill="none" stroke="#22c55e" stroke-width="16"
+          stroke-dasharray="942" stroke-dashoffset="235" stroke-linecap="round"
+          transform="rotate(-90 600 280)"/>
+
+  <!-- Timer Text -->
+  <text x="600" y="295" font-family="system-ui, -apple-system, sans-serif"
+        font-size="72" font-weight="800" fill="#ffffff" text-anchor="middle">25:00</text>
+  <text x="600" y="340" font-family="system-ui, -apple-system, sans-serif"
+        font-size="24" fill="#94a3b8" text-anchor="middle" letter-spacing="2">FOCUS</text>
+
+  <!-- Tomato Icon -->
+  <g transform="translate(80, 240)">
+    <ellipse cx="40" cy="50" rx="35" ry="32" fill="#ef4444"/>
+    <ellipse cx="30" cy="44" rx="10" ry="8" fill="#f87171" opacity="0.6"/>
+    <path d="M40 18 L40 28" stroke="#22c55e" stroke-width="5" stroke-linecap="round"/>
+    <path d="M40 22 Q30 14 22 20 Q30 22 40 22" fill="#22c55e"/>
+    <path d="M40 22 Q50 14 58 20 Q50 22 40 22" fill="#22c55e"/>
+    <path d="M40 18 Q36 8 40 2 Q44 8 40 18" fill="#16a34a"/>
+  </g>
+
+  <!-- Title -->
+  <text x="600" y="520" font-family="system-ui, -apple-system, sans-serif"
+        font-size="48" font-weight="700" fill="#ffffff" text-anchor="middle">Pomodoro Timer</text>
+
+  <!-- Subtitle -->
+  <text x="600" y="570" font-family="system-ui, -apple-system, sans-serif"
+        font-size="24" fill="#94a3b8" text-anchor="middle">Free Online Focus Timer for Productivity</text>
+
+  <!-- Decorative elements -->
+  <circle cx="100" cy="100" r="5" fill="#22c55e" opacity="0.6"/>
+  <circle cx="1100" cy="530" r="5" fill="#38bdf8" opacity="0.6"/>
+  <circle cx="150" cy="500" r="3" fill="#f97316" opacity="0.6"/>
+  <circle cx="1050" cy="150" r="4" fill="#22c55e" opacity="0.6"/>
+</svg>
